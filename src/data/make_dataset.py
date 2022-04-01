@@ -2,10 +2,20 @@
 
 import pandas as pd
 import numpy as np
+import os
 from src.configs.data_config import MIN_YEAR,MAX_YEAR,RAW_COLUMNS,POS_IDs
 
-MIN_YEAR = MIN_YEAR[-2:]
-MAX_YEAR = MAX_YEAR[-2:]
+
+MIN_YEAR = int(str(MIN_YEAR)[-2:])
+MAX_YEAR = int(str(MAX_YEAR)[-2:])
+
+def build_output_dirs():
+    "Function to build output directories for saved data"
+    paths = ['./data/raw/','./data/interim/']
+
+    for path in paths:
+        if not os.path.exists(path):
+            os.mkdir(path)
 
 def collect_data(min_year,max_year,raw_cols):
     """
@@ -59,7 +69,7 @@ def clean_data(position_dict):
 
 
 if __name__ == '__main__':
-
+    build_output_dirs()
     collect_data(MIN_YEAR,MAX_YEAR,RAW_COLUMNS)
     clean_data(POS_IDs)
 
