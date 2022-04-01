@@ -1,0 +1,17 @@
+name: fpl_prediction-py39
+channels:
+  - defaults
+dependencies:
+  - python=3.9
+  - pip
+  - pip:
+    - scikit-learn
+    - matplotlib
+    - pandas
+    - numpy
+    - seaborn
+    - jupyterlab
+    - lightgbm
+    - tqdm
+    - optuna
+    - pyaml

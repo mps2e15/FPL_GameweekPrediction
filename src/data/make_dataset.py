@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 import os
 from src.configs.data_config import MIN_YEAR,MAX_YEAR,RAW_COLUMNS,POS_IDS
-
+from src.configs.data_config import IDENTIFIERS, REALS, CATEGORIES, TARGET
 # %%
 
 MIN_YEAR = int(str(MIN_YEAR)[-2:])
@@ -65,6 +65,12 @@ def clean_data(position_dict):
     df['fdr_player'] = np.where(df.was_home==True,df.team_h_difficulty,df.team_a_difficulty)
     df['fdr_opposition'] = np.where(df.was_home==True,df.team_a_difficulty,df.team_h_difficulty)
     df['fdr_diff'] = df['fdr_player']-df['fdr_opposition']
+
+    #Add unique identifier relating to player and season
+    df['uid'] = (df.element.astype(str)+df.season.str.replace('-','')).astype(int)
+
+    #Subet to required cols
+    df = df.loc[:,IDENTIFIERS+REALS+CATEGORIES+TARGET]
 
     #Export data
     df.to_csv('./data/interim/raw.csv')
