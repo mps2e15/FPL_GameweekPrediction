@@ -1,10 +1,12 @@
 """Script used to scrape historic player and fixture data"""
 
+# %%
 import pandas as pd
 import numpy as np
 import os
-from src.configs.data_config import MIN_YEAR,MAX_YEAR,RAW_COLUMNS,POS_IDs
+from src.configs.data_config import MIN_YEAR,MAX_YEAR,RAW_COLUMNS,POS_IDS
 
+# %%
 
 MIN_YEAR = int(str(MIN_YEAR)[-2:])
 MAX_YEAR = int(str(MAX_YEAR)[-2:])
@@ -56,7 +58,7 @@ def collect_data(min_year,max_year,raw_cols):
 def clean_data(position_dict):
     """Minor cleaning procedure which saves intermediate data outputs"""
 
-    df = pd.read_csv('./data/raw/raw.csv')
+    df = pd.read_csv('./data/raw/raw.csv',index_col=0)
     df['position'] = df.pos_id.map(position_dict)
 
     #Calculate fixture difficulty rating
@@ -71,7 +73,7 @@ def clean_data(position_dict):
 if __name__ == '__main__':
     build_output_dirs()
     collect_data(MIN_YEAR,MAX_YEAR,RAW_COLUMNS)
-    clean_data(POS_IDs)
+    clean_data(POS_IDS)
 
 
 
