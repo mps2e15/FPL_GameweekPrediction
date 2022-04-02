@@ -22,9 +22,9 @@ max_prediction_length=38
 #Definitions inspired bt pytorch-forecasting
 # https://github.com/jdb78/pytorch-forecasting/blob/master/pytorch_forecasting/data/timeseries.py
 
-STATIC_CATEGORICALS = ['position','was_home']
-STATIC_REALS = ['value']
-TIME_VARYING_KNOWN_CATEGORICALS = []
+STATIC_CATEGORICALS = ['position']
+STATIC_REALS = []
+TIME_VARYING_KNOWN_CATEGORICALS = ['was_home']
 TIME_VARYING_KNOWN_REALS = ['fdr_player','fdr_diff']
 TIME_VARYING_UNKNOWN_CATEGORICALS = []
-TIME_VARYING_UNKNOWN_REALS = ['bps', 'influence','creativity','threat','ict_index','minutes']
+TIME_VARYING_UNKNOWN_REALS = ['bps', 'influence','creativity','threat','ict_index','minutes','total_points','value']
