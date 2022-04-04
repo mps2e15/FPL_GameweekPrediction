@@ -47,11 +47,11 @@ def plot_static_and_future_importances(importances,static_categoricals,time_vary
     fig,axs = plt.subplots(1, 3,figsize = (12,3),sharey=True)
 
     #static categores
-    is_static_categorical = np.sum([(importances.index.str.contains(col) & ~importances.index.str.contains('_l'))  for col in static_categoricals],axis=0)>0
+    is_static_categorical = np.sum([(importances.index.str.contains(col) & ~importances.index.str.contains('_lag'))  for col in static_categoricals],axis=0)>0
     importances.loc[is_static_categorical].plot.bar(ylim=(0,importances.max()),ax=axs[0],title='Static Categoricals')
 
     #time varying categories
-    is_time_varying_categorical = np.sum([(importances.index.str.contains(col) & ~importances.index.str.contains('_l'))  for col in time_varying_known_categoricals],axis=0)>0
+    is_time_varying_categorical = np.sum([(importances.index.str.contains(col) & ~importances.index.str.contains('_lag'))  for col in time_varying_known_categoricals],axis=0)>0
     importances.loc[is_time_varying_categorical].plot.bar(ylim=(0,importances.max()),ax=axs[1],title='Time Varying Categoricals')
 
     #Tiem varying reals
