@@ -71,6 +71,7 @@ if __name__ == '__main__':
 
     # Create series of future y values
     y_data = gen_grouped_lagged_features(fpl_data.loc[:,TARGET+['uid']],group_col='uid',n_lags=-MAX_PREDICTION_LENGTH)
+    assert y_data.isna().sum(axis=1).max()<MAX_PREDICTION_LENGTH, "Instances of all NaN in y_data"
 
     # Get the indicies of the df according to train/val/test membership
     train_idx,val_idx,test_idx = get_train_indices(fpl_data,uids)
@@ -86,3 +87,5 @@ if __name__ == '__main__':
     X_test.to_csv(output_dir+'X_test.csv'), y_test.to_csv(output_dir+'y_test.csv')
 
 
+
+# %%

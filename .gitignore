@@ -20,3 +20,6 @@ __pycache__/
 FPL_GameweekPrediction.code-workspace
 .vscode/
 .env
+
+#Other filetypes
+*.npy

@@ -1,0 +1,8 @@
+naive_averaging_model:
+  file: ./references/test_preds/naive_averaging_model.npy
+  name: Naive Averaging Model
+  timestamp: 2022-04-05 17:47:54.388984
+naive_model:
+  file: ./references/test_preds/naive_model.npy
+  name: Naive Model
+  timestamp: 2022-04-05 17:47:54.369988
