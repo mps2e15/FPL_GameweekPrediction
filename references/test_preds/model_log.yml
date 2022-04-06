@@ -1,3 +1,7 @@
+elasticnet_lm:
+  file: ./references/test_preds/elasticnet_lm.npy
+  name: ElasticNet LM
+  timestamp: 2022-04-06 12:12:00.956667
 naive_averaging_model:
   file: ./references/test_preds/naive_averaging_model.npy
   name: Naive Averaging Model
