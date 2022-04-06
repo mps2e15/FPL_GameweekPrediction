@@ -5,11 +5,13 @@ dependencies:
   - python=3.9
   - pip
   - pip:
+    - numpy
     - scikit-learn
     - matplotlib
     - pandas
-    - numpy
+    - tensorflow
     - seaborn
+    - ipykernel
     - jupyterlab
     - lightgbm
     - tqdm
