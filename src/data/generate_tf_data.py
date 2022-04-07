@@ -120,8 +120,8 @@ class TFdata_serializer:
             'seq_len': self._int64_feature(index.shape[0]),
 
             'static_features': self._floats_feature(static_features.flatten()),
-            'time_varying_know': self._floats_feature(time_varying_known_features.flatten()),
-            'static_features': self._floats_feature(time_varying_unknown_features.flatten()),
+            'time_varying_known': self._floats_feature(time_varying_known_features.flatten()),
+            'time_varying_unknown': self._floats_feature(time_varying_unknown_features.flatten()),
             'labels': self._floats_feature(labels.flatten()),
             }
 
@@ -169,7 +169,7 @@ if __name__ == '__main__':
             
             with tf.io.TFRecordWriter(filename) as writer:
 
-                for uid in subset_uids:
+                for uid in subset_uids[index:end]:
 
                     player_data = data[lambda x:x.uid==uid] #subset player
 
@@ -188,9 +188,6 @@ if __name__ == '__main__':
 
                 #Update index
                 index=end
-
-
-
 
 
 # %%
