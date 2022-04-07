@@ -14,7 +14,6 @@ CATEGORIES = ['position','was_home']
 TARGET = ['total_points']
 
 STATIC_FEATS = ['value','position','was_home']
-STATIC_FEATS = ['value','position','was_home']
 
 
 #Definitions inspired bt pytorch-forecasting
@@ -29,3 +28,5 @@ TIME_VARYING_UNKNOWN_REALS = ['bps', 'influence','creativity','threat','ict_inde
 
 #Min season minutes forseason points inclusion in analysis
 MINUMUM_SEASON_POINTS = 25
+
+TF_RECORDS_PER_SHARD = 100
