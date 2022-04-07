@@ -1,3 +1,7 @@
+dnn:
+  file: ./references/test_preds/dnn.npy
+  name: DNN
+  timestamp: 2022-04-07 18:12:15.973949
 elasticnet_lm:
   file: ./references/test_preds/elasticnet_lm.npy
   name: ElasticNet LM
@@ -6,6 +10,10 @@ lightgbm:
   file: ./references/test_preds/lightgbm.npy
   name: LightGBM
   timestamp: 2022-04-06 17:02:13.708258
+lstm:
+  file: ./references/test_preds/lstm.npy
+  name: LSTM
+  timestamp: 2022-04-07 18:23:55.962774
 naive_averaging_model:
   file: ./references/test_preds/naive_averaging_model.npy
   name: Naive Averaging Model
