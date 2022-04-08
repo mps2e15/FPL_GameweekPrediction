@@ -18,10 +18,6 @@ naive_averaging_model:
   file: ./references/test_preds/naive_averaging_model.npy
   name: Naive Averaging Model
   timestamp: 2022-04-08 10:07:17.729266
-naive_model:
-  file: ./references/test_preds/naive_model.npy
-  name: Naive Model
-  timestamp: 2022-04-08 10:07:17.712263
 tcn:
   file: ./references/test_preds/tcn.npy
   name: TCN

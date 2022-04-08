@@ -47,8 +47,8 @@ if __name__ == '__main__':
     X_train,y_train, X_val,y_val, X_test,y_test = load_ml_data()
     
     #Produce the naive model (using t-1)
-    y_hat_naive = gen_naive_yhat(X_test,y_test)
-    export_predictions(y_hat_naive,'Naive Model')
+    # y_hat_naive = gen_naive_yhat(X_test,y_test)
+    # export_predictions(y_hat_naive,'Naive Model')
 
     #Produce the naive averaging model (using avg(t-n))
     y_hat_naive_avg = gen_naive_avg_yhat(X_test,y_test)
