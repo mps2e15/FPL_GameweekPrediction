@@ -1,5 +1,4 @@
 # %%
-from pickle import FALSE
 import tensorflow as tf
 from src.data.tf_data_utils import prepare_data
 from src.models.tf_model_utils import SequenceFlattener, TimeDistributedDense
@@ -94,7 +93,6 @@ if __name__ == '__main__':
     es = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=10,min_delta=0.0025,restore_best_weights=True)
     model.fit(train_ds,validation_data=val_ds ,callbacks=[es],epochs=100,verbose=True)
 
-    # %%
     #Export the model and the results
     preds = np.squeeze(model.predict(test_ds))
 
