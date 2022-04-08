@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 
-def plot_example(fpl_data,target,reals,uid=None):
+def plot_example(ax,fpl_data,target,reals,uid=None):
     """
     Function to sample random player/season and plot contuninuous vals
 
@@ -25,9 +25,10 @@ def plot_example(fpl_data,target,reals,uid=None):
         uid = fpl_data.uid.drop_duplicates().sample(1).values[0]
 
     player_details = fpl_data[lambda x: x.uid==uid].head(1).loc[:,['name','season']]
-    fpl_data.loc[fpl_data.uid==uid,target+reals].reset_index(drop=True).\
-                        plot(subplots=True,xlabel='Game',title=f"Player: {player_details.name.values[0]}",figsize=(12,6))
-    plt.show()
+    plot = fpl_data.loc[fpl_data.uid==uid,target+reals].reset_index(drop=True).\
+                        plot(subplots=True,xlabel='GameWeek',title=f"Player: {player_details.name.values[0]}",ax=ax)
+
+    return plot
 
 def plot_static_and_future_importances(importances,static_categoricals,time_varying_known_categoricals,time_varying_known_reals):
 
@@ -121,4 +122,5 @@ def plot_time_varying_importances(importances,time_varying_unknown_reals_transfo
         ax.xaxis.set_major_formatter(ticker.FormatStrFormatter('%0.0f'))
 
     plt.tight_layout()
+    plt.savefig('./references/plots/lagged_importance.png')
     plt.show()
