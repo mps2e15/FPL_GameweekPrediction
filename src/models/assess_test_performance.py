@@ -36,7 +36,7 @@ def run_assessment_loop(log,y_true,y_mask):
     return rmse_dict
 
 def save_results(result_dict):
-    res_file = './references/results/rmse_result.yml'
+    res_file = './references/results/mse_result.yml'
     with open(res_file, 'w') as file:
             yaml.dump(result_dict, file)
 
