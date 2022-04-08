@@ -18,7 +18,7 @@ def gen_naive_yhat(X,y):
     This assumes that the last total_points is repeated over the prediction window
     """
     X = X['total_points_lag1']
-    X = X.fillna(X.median())
+    X = X.fillna(X.mean())
     X = np.expand_dims(X.values, axis=1)
     y_hat = np.repeat(X,y.shape[1], axis=1)
     return  y_hat
@@ -30,7 +30,7 @@ def gen_naive_avg_yhat(X,y):
     """
     lagged_target_cols = X.columns.str.contains('total_points')
     X = X.loc[:,lagged_target_cols]
-    X = X.fillna(X.median())
+    X = X.fillna(X.mean())
     X=X.mean(axis=1)
     X = np.expand_dims(X.values, axis=1)
     y_hat = np.repeat(X,y.shape[1], axis=1)
