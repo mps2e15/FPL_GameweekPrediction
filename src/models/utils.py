@@ -38,7 +38,7 @@ def export_predictions(preds,model_name):
         with open(log_file, 'w') as file:
             yaml.dump(log_dict, file, default_flow_style=False)
 
-def export_ml_model(model,model_name):
+def export_model(model,model_name,tf_model=False):
     """
     Function to export model and log the model in a YAML file.
 
@@ -51,10 +51,12 @@ def export_ml_model(model,model_name):
     Exports .yml file containing model name, file reference and timestamp
 
     """
-   
     name_fmt = model_name.lower().replace(' ','_')
     dir = './models/'
-    joblib.dump(model, f"{dir}{name_fmt}.joblib")
+    if tf_model:
+        model.save(f'{dir}{name_fmt}')
+    else:
+        joblib.dump(model, f"{dir}{name_fmt}.joblib")
 
     log_file = f"{dir}model_log.yml"
     if not os.path.exists(log_file):
