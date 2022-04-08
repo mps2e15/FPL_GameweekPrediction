@@ -1,8 +1,10 @@
 # %% 
 import yaml
+import matplotlib.pyplot as plt
 from src.models.utils import load_ml_data
 import numpy as np
 from sklearn.metrics import mean_squared_error
+import pandas as pd
 import os 
 
 def build_output_dirs(paths):
@@ -42,7 +44,6 @@ def save_results(result_dict):
 
 
 
-
 if __name__ == '__main__':
 
     #Generate output paths
@@ -64,5 +65,11 @@ if __name__ == '__main__':
 
     #Export the result
     save_results(rmse_dict)
+    plt.rcParams.update(plt.rcParamsDefault)
+    df = pd.DataFrame(rmse_dict)
+    df.index= df.index+1
+    df.plot(xlabel='t+n',ylabel='Mean Squared Error')
+    plt.savefig('/references/plots/performance.png')
+
 
 # %%
