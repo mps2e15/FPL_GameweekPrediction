@@ -6,7 +6,7 @@ import numpy as np
 from sklearn.linear_model import RidgeCV
 from sklearn.multioutput import MultiOutputRegressor
 from src.configs.model_config import RANDOM_SEED
-from src.models.utils import export_predictions, export_ml_model, load_ml_data, infer_dtypes
+from src.models.utils import export_predictions, export_model, load_ml_data, infer_dtypes
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.impute import SimpleImputer
@@ -118,7 +118,7 @@ if __name__ == '__main__':
     #Export result
     model_name = 'ElasticNet LM'
     export_predictions(test_preds,model_name )
-    export_ml_model(regr,model_name )
+    export_model(regr,model_name )
 
 
     ## LIGHT GBM ## 
@@ -129,7 +129,7 @@ if __name__ == '__main__':
     #Export the the result
     model_name = 'LightGBM'
     export_predictions(test_preds,model_name )
-    export_ml_model(regr,model_name)
+    export_model(regr,model_name)
 
 
 # %%
