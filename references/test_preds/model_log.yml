@@ -22,3 +22,7 @@ tcn:
   file: ./references/test_preds/tcn.npy
   name: TCN
   timestamp: 2022-04-08 16:15:21.269426
+tft:
+  file: ./references/test_preds/tft.npy
+  name: TFT
+  timestamp: 2022-04-12 15:05:14.970098

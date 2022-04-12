@@ -36,6 +36,7 @@ This repository uses **Machine Learning** (inc **Deep Learning**) in order to fo
     * <strong> /dnn</strong>: A simple Deep Neural Network
     * <strong> /LSTM</strong>: Long short-term memory sequence model
     * <strong> /TCN</strong>: Temporal Convolutional Network sequence model
+    * <strong> /TFT</strong>: Temporal Fusion Transformer
     * <strong> /elasticnet_lm.joblib</strong>: Linear ML Model
     * <strong> /lightgbm.joblib</strong>: Light Gradient Boosting ML model
 * <strong>[ Notebooks ](./notebooks/)</strong>: folder containing Jupyter notebooks
@@ -103,6 +104,7 @@ To leverage this information to predict future gameweek points for the next 6 ga
 * <strong>LightGBM</strong>: Non-linear Gradient Boosting Machine
 * <strong>LSTM</strong>: Deep Long Short Term Memory model
 * <strong>TCN</strong>: Deep Temporal Convolutional Neural Network
+* <strong>TFT</strong>: Deep Temporal Fusion Transformer model
 
 The test MSE scores are presented below:
 
