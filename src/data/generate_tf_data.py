@@ -32,7 +32,10 @@ if __name__ == '__main__':
 
     #Create new output directory for TF records
     new_dirs = [f'./data/processed/TF_records/{subset}/' for subset in ['train','val','test']]
+    new_dirs+= ['./models/']
     build_output_dirs(new_dirs)
+
+    # %%
 
     #Load the data and uids
     data, uids = load_data()
