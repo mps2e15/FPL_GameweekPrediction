@@ -16,12 +16,12 @@ fun_tr = FunctionTransformer(to_object)
 @dataclass
 class TimeseriesDataTransformer:
     """Class for preprocessing data timeseries data"""
-    time_varying_unknown_reals: list[str] = field(default_factory=list)
-    time_varying_unknown_categoricals: list[str] = field(default_factory=list)
-    time_varying_known_reals: list[str] = field(default_factory=list)
-    time_varying_known_categoricals: list[str] = field(default_factory=list)
-    static_reals: list[str] = field(default_factory=list)
-    static_categoricals: list[str] = field(default_factory=list)
+    time_varying_unknown_reals: list = field(default_factory=list)
+    time_varying_unknown_categoricals: list = field(default_factory=list)
+    time_varying_known_reals: list = field(default_factory=list)
+    time_varying_known_categoricals: list = field(default_factory=list)
+    static_reals: list = field(default_factory=list)
+    static_categoricals:list = field(default_factory=list)
 
     def __post_init__(self):
         self.static_transformer = self.build_column_transformer(self.static_reals,\
