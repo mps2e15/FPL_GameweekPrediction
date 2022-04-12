@@ -4,7 +4,8 @@ from sklearn.preprocessing import MinMaxScaler,OneHotEncoder,FunctionTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 import tensorflow as tf
-from dataclasses import dataclass
+from dataclasses import dataclass,field
+import pandas as pd
 
 def to_object(x):
   return pd.DataFrame(x).astype(object)
@@ -15,12 +16,12 @@ fun_tr = FunctionTransformer(to_object)
 @dataclass
 class TimeseriesDataTransformer:
     """Class for preprocessing data timeseries data"""
-    time_varying_unknown_reals: list[str]
-    time_varying_unknown_categoricals: list[str]
-    time_varying_known_reals: list[str]
-    time_varying_known_categoricals: list[str]
-    static_reals: list[str]
-    static_categoricals: list[str]
+    time_varying_unknown_reals: list[str] = field(default_factory=list)
+    time_varying_unknown_categoricals: list[str] = field(default_factory=list)
+    time_varying_known_reals: list[str] = field(default_factory=list)
+    time_varying_known_categoricals: list[str] = field(default_factory=list)
+    static_reals: list[str] = field(default_factory=list)
+    static_categoricals: list[str] = field(default_factory=list)
 
     def __post_init__(self):
         self.static_transformer = self.build_column_transformer(self.static_reals,\
