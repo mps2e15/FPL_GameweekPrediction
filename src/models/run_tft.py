@@ -35,7 +35,7 @@ def build_TFT(tft_units=16, dropout=0.2,learning_rate=1e-2,seq_past_len=16,add_p
     time_varying_unknown_past_inpt = tf.keras.layers.Input(shape=(seq_past_len,8),name='tv_unknown_past')
     time_varying_past  = tf.keras.layers.Concatenate()([time_varying_known_past_inpt,time_varying_unknown_past_inpt])
 
-    vsn_past = VariableSelection(num_features=12,units=tft_units,dropout_rate=0.2,time_varying=True)(time_varying_past,static_context_variable_selection)
+    vsn_past = VariableSelection(num_features=12,units=tft_units,dropout_rate=dropout,time_varying=True)(time_varying_past,static_context_variable_selection)
     history_lstm, state_h, state_c = tf.keras.layers.LSTM(tft_units, dropout=dropout,return_state=True,\
                                         return_sequences=True,name='lstm_history')(vsn_past,initial_state=[static_context_state_h,static_context_state_c])
     past_lstm_skip = AddAndNorm()([vsn_past,history_lstm])
@@ -46,7 +46,7 @@ def build_TFT(tft_units=16, dropout=0.2,learning_rate=1e-2,seq_past_len=16,add_p
 
     #FUTURE COMPONENTS
     time_varying_known_future_inpt = tf.keras.layers.Input(shape=(seq_fut_len,4),name='tv_known_future')
-    vsn_future= VariableSelection(num_features=4,seq_len=6,units=tft_units,dropout_rate=0.2,time_varying=True)(time_varying_known_future_inpt,static_context_variable_selection)
+    vsn_future= VariableSelection(num_features=4,seq_len=6,units=tft_units,dropout_rate=dropout,time_varying=True)(time_varying_known_future_inpt,static_context_variable_selection)
     future_lstm = tf.keras.layers.LSTM(tft_units, dropout=dropout,return_state=False,\
                                         return_sequences=True,name='lstm_future')(vsn_future,initial_state=[state_h, state_c])
     future_lstm_skip = AddAndNorm(name='future_add_norm')([vsn_future,future_lstm])
@@ -64,7 +64,7 @@ def build_TFT(tft_units=16, dropout=0.2,learning_rate=1e-2,seq_past_len=16,add_p
     transformer_query= PositionEmbedding(maxlen=seq_fut_len,num_hid=tft_units)(future_rep)
     decoded= TransformerDecoder(embed_dim=tft_units, num_heads=4, feed_forward_dim=tft_units, dropout_rate=0.1)(combined_rep,transformer_query)
     decoder_skip = AddAndNorm(name='decoder_skip')([future_rep,decoded])
-    future_grn = GatedResidualNetwork(tft_units,dropout_rate=0.2)(decoder_skip )
+    future_grn = GatedResidualNetwork(tft_units,dropout_rate=dropout)(decoder_skip )
     decoder_skip = AddAndNorm(name='transformer_skip')([future_lstm_skip,future_grn])
     out = tf.keras.layers.Dense(1)(decoder_skip)
     model = tf.keras.Model([static_inpt,time_varying_known_past_inpt,time_varying_unknown_past_inpt,time_varying_known_future_inpt],out ,name='CombinedModel')
@@ -91,7 +91,7 @@ def objective(trial):
     #Define fit params
     es = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=5,min_delta=0.0025,restore_best_weights=True)
     callbacks = [es,optuna.integration.TFKerasPruningCallback(trial, 'val_loss')]
-    model.fit(train_ds,validation_data=val_ds ,callbacks= callbacks,epochs=20,verbose=False)
+    model.fit(train_ds,validation_data=val_ds ,callbacks= callbacks,epochs=20,verbose=True)
 
     #Return loss
     loss = min(model.history.history['val_loss'])
@@ -129,3 +129,5 @@ if __name__ == '__main__':
     model_name= 'TFT'
     export_predictions(preds,model_name )
     export_model(model,model_name,tf_model=True )
+
+# %%
