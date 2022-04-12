@@ -17,7 +17,7 @@ def build_output_dirs():
 
     for path in paths:
         if not os.path.exists(path):
-            os.mkdir(path)
+            os.makedirs(path)
 
 def collect_data(min_year,max_year,raw_cols):
     """

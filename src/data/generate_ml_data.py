@@ -13,7 +13,7 @@ def build_output_dirs():
 
     for path in paths:
         if not os.path.exists(path):
-            os.mkdir(path)
+            os.makedirs(path)
 
 def load_data():
     """Load raw data including list of uids for training validation and test"""
