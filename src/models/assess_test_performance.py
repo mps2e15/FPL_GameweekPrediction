@@ -69,7 +69,7 @@ if __name__ == '__main__':
     df = pd.DataFrame(rmse_dict)
     df.index= df.index+1
     df.plot(xlabel='t+n',ylabel='Mean Squared Error')
-    plt.savefig('/references/plots/performance.png')
+    plt.savefig('./references/plots/performance.png')
 
 
 # %%
