@@ -131,3 +131,16 @@ if __name__ == '__main__':
     export_model(model,model_name,tf_model=True )
 
 # %%
+model = build_TFT(**study.best_trial.params)
+es = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=10,min_delta=0.0025,restore_best_weights=True)
+model.fit(train_ds,validation_data=val_ds ,callbacks=[es],epochs=100,verbose=True)
+
+#Export the model and the results
+preds = np.squeeze(model.predict(test_ds))
+
+dl2ml_test_idx = np.load('./data/interim/dl2ml_test_idx.npy') # reorganised predictions to match ML model index
+preds = preds[dl2ml_test_idx,:]
+model_name= 'TFT'
+export_predictions(preds,model_name )
+export_model(model,model_name,tf_model=True )
+# %%

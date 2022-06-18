@@ -246,8 +246,10 @@ class TransformerDecoder(tf.keras.layers.Layer):
         )
 
     def call(self, enc_out, target):
-        enc_out = self.enc_att(target, enc_out)
-        enc_out_norm = self.layernorm2(self.enc_dropout(enc_out) + target)
+        target_att = self.self_att(target, target)
+        target_norm = self.layernorm1(target + self.self_dropout(target_att))
+        enc_out = self.enc_att(target_norm, enc_out)
+        enc_out_norm = self.layernorm2(self.enc_dropout(enc_out) + target_norm)
         ffn_out = self.ffn(enc_out_norm)
         ffn_out_norm = self.layernorm3(enc_out_norm + self.ffn_dropout(ffn_out))
         return ffn_out_norm
